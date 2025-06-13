@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Đặt Làm Website Tình Yêu 💖</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      background: #fffafc;
+    }
+    h1 {
+      text-align: center;
+      color: #d6336c;
+    }
+    input, textarea {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+    button {
+      background-color: #ff4d6d;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #status {
+      margin-top: 10px;
+      font-weight: bold;
+      color: green;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📋 Đặt Làm Website</h1>
+
+  <form id="order-form">
+    <input type="text" name="name" placeholder="Họ tên của bạn" required>
+    <input type="text" name="contact" placeholder="Zalo hoặc Facebook" required>
+    <textarea name="idea" placeholder="Bạn muốn làm web gì? (ví dụ: Love Story, sinh nhật, portfolio...)" rows="4" required></textarea>
+    <button type="submit">Gửi Yêu Cầu 💌</button>
+  </form>
+
+  <p id="status"></p>
+
+  <script>
+    const form = document.getElementById("order-form");
+    const status = document.getElementById("status");
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      const data = {
+        name: form.name.value,
+        contact: form.contact.value,
+        idea: form.idea.value
+      };
+
+      fetch("https://script.google.com/u/0/home/projects/1ixRN7iBEtAY6HcRSDzGQ7BAFdoHA_9hVbWa28UGLu8ymbYi6wKGbnYVp/edit", {
+        method: "POST",
+        body: JSON.stringify(data)
+      })
+      .then(res => res.text())
+      .then(response => {
+        if (response === "Success") {
+          status.innerText = "✅ Gửi thành công! Mình sẽ liên hệ sớm!";
+          form.reset();
+        } else {
+          status.innerText = "❌ Có lỗi xảy ra!";
+        }
+      })
+      .catch(err => {
+        status.innerText = "⚠️ Lỗi kết nối!";
+      });
+    });
+  </script>
+
+</body>
+</html>
